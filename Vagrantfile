@@ -73,4 +73,14 @@ Vagrant.configure("2") do |config|
   sudo apt-get update
   sudo apt-get install puppet-agent
    SHELL
+
+
+  config.vm.provision "puppet" do |puppet|
+    # modules folder path
+    puppet.module_path = "modules"
+    # manifests folder path        
+    puppet.manifests_path = "manifests"   
+    # name of principal puppet manifest
+    puppet.manifest_file = "default.pp"   
+  end
 end
