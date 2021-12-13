@@ -43,15 +43,21 @@ exec { 'Enable URL rewriting':
     command => "/usr/bin/sudo service apache2 reload"
   }
 
+
+  file { '/srv/www/wordpress/wp-config.php':
+    ensure  => 'present',
+    replace => 'yes', # this is the important property
+    content => template('wordpress/wp-config.php'),
+    
+  }
+
+
 service { 'apache2':
     ensure => running,
     enable => true,
     hasstatus  => true,
     restart => "/usr/sbin/apachectl configtest && /usr/sbin/service apache2 reload",
   }
-
-
-
 
 }
 
